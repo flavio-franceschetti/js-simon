@@ -3,3 +3,26 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+body {
+  background-color: lightslategray;
+}
+
+.container {
+  width: 80%;
+  min-height: 200px;
+  margin: 50px auto;
+}
+
+.num-container {
+  text-align: center;
+}
+
+.random-num {
+  margin-right: 20px;
+  font-size: 30px;
+  background-color: lightcoral;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
