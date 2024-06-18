@@ -35,7 +35,7 @@ for (let i = 0; i < randomNumArr.length; i++) {
 // creo la variabile con il countdown dentro
 let countdown = setInterval(() => {
   countdownTimer--;
-  timerContainer.innerHTML = `Tempo rimanente: ${countdownTimer}`;
+  timerContainer.innerHTML = `Tempo rimanente: ${countdownTimer}. Memorizza i numeri!!!`;
 }, 1000);
 
 // creo un timeout di 30 secondi dopo i quali scompaiono i numeri generati e chiedo all'utente tramite il prompt in che ordine erano i numeri
