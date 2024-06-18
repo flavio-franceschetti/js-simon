@@ -13,7 +13,7 @@ function generateTotNumRandom(min, max, howMuch, arrayName) {
       arrayName.push(risultato);
     }
   }
-  console.log(arrayName);
+  // console.log(arrayName);
 }
 
 // funzione per comparare gli array fra di loro e vedere se sono stati inseriti gli stessi valori
