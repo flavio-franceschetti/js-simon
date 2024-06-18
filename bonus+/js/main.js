@@ -10,6 +10,15 @@ const timerContainer = document.querySelector(".timer");
 // dichiaro la variabile dello start del timer dato che lo voglio far andare al contrario partirò da 30
 let countdownTimer = 30;
 
+// recupero il container per gli input dell'utente in pagina
+let userInputContainer = document.querySelector(".user-input-container");
+
+// bottone per l'invio dei numeri inseriti dall'utente
+let sendButton = document.getElementById("invia");
+
+// recupero l'elemento per inserire il risultato nell'html
+let result = document.querySelector(".risultato");
+
 // richiamo la funzione per gererare 5 numeri casuali da 1 a 100 e pusharli nell array
 generateTotNumRandom(1, 100, 5, randomNumArr);
 
@@ -32,32 +41,37 @@ setTimeout(() => {
   // rendo invisibili i numeri dopo il tempo stimato
   numContainer.innerHTML = "";
   clearInterval(countdown);
-}, 30000);
+}, 3000);
 
 setTimeout(() => {
   // creo un array vuoto dove verranno inseriti i numeri scelti dall'utente
   let userNumbers = [];
-  for (i = 1; i <= 5; i++) {
-    let userInput = parseInt(
-      prompt(`Inserisci il numero che era nella posizione: ${i}`)
-    );
-    userNumbers.push(userInput);
-  }
-  console.log(userNumbers);
+  // creo un event listener sul bottone una volta inseriti i numeri li invia nell'array userNumbers
+  sendButton.addEventListener("click", function () {
+    event.preventDefault();
+    // seleziono tutti gli input per l'inserimento dei numeri e il bottone per l'invioo
+    let num1 = parseInt(document.getElementById("num1").value);
+    let num2 = parseInt(document.getElementById("num2").value);
+    let num3 = parseInt(document.getElementById("num3").value);
+    let num4 = parseInt(document.getElementById("num4").value);
+    let num5 = parseInt(document.getElementById("num5").value);
+    // i numeri inseriti dall'utente negli input viene pushato nell'array userNumbers
+    userNumbers.push(num1, num2, num3, num4, num5);
+    console.log(userNumbers);
 
-  // Trovo i numeri indovinati
-  let matches = findMatches(randomNumArr, userNumbers);
-  console.log("Numeri indovinati:", matches);
-  alert(`Hai indovinato ${matches.length} numeri: ${matches.join(", ")}`);
+    // creo un array per i numeri controllati
+    const checkedNum = [];
+    // creo un ciclo dove vado a ciclare i valori inseriti dall'user e controllo se sono inclusi nell'array dei numeri casuali se si li pusho nel nuovo array dei numeri con il check
+    for (let i = 0; i < userNumbers.length; i++) {
+      if (randomNumArr.includes(userNumbers[i])) {
+        checkedNum.push(userNumbers[i]);
+      }
+    }
+    console.log(checkedNum);
 
-  // creo una variabile con dentro la funzione per il check degli array
-  let arrayCheck = arrayCompare(randomNumArr, userNumbers);
-  console.log(arrayCheck);
-
-  // creo le condizioni dove se arraycheck è false l'user ha perso altrimenti ha vinto
-  if (arrayCheck === false) {
-    alert("HAI PERSO");
-  } else {
-    alert("HAI VINTO");
-  }
-}, 31000);
+    // con questo ciclo tiro fuori i valori del nuovo array dei numeri che sono stati indovinati e metto nell'elemento html del risultato la quantità di numeri indovinati e quali numeri sono stati indovinati
+    for (let i = 0; i < checkedNum.length; i++) {
+      result.innerHTML = `Hai indovinato ${checkedNum.length} e sono ${checkedNum[i]}`;
+    }
+  });
+}, 3100);
